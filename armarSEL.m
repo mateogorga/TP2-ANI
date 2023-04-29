@@ -5,7 +5,7 @@ for fila = 1:(n-1)
   if (fila == 1)#fila 1
     resultado(fila,1) = -4;
     resultado(fila,2) = 5;
-    resultado(fila,3) = 6;
+    resultado(fila,3) = -4;
     resultado(fila,4) = 1;
     for j = 5:(n+1)#completo con ceros
       resultado(fila,j) = 0;
