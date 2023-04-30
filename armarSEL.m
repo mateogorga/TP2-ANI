@@ -68,7 +68,7 @@ endfor
 
 x = ones(10,1);
 
-for i = 1:n
+for i = 1:(n-1)
   x(i) = (resultado(i,n+1) -sum(resultado(i,1:n)*x(:)))/resultado(i,i);
 endfor
 
