@@ -54,10 +54,23 @@ endfor
 
 disp(resultado);
 
-#Eliminacion Gaussiana
+#b) 1) Eliminacion Gaussiana
+
+#Triangulacion de la matriz
 
 for i = 1:n
   for j = (i+1):(n-1)
     resultado(j,:) = resultado(j,:) - (resultado(j,i)/resultado(i,i))*resultado(i,:);
   endfor
 endfor
+
+#Vector solucion
+
+x = [];
+
+for i = 1:n
+  k = (i+1):n;
+  x(i) = (resultado(i,n+1) -sum(resultado(i,1:n-1)*x(:)))/resultado(i,i);
+endfor
+
+disp(x);
