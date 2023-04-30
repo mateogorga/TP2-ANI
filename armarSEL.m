@@ -53,3 +53,11 @@ endfor
 
 
 disp(resultado);
+
+#Eliminacion Gaussiana
+
+for i = 1:n
+  for j = (i+1):(n-1)
+    resultado(j,:) = resultado(j,:) - (resultado(j,i)/resultado(i,i))*resultado(i,:);
+  endfor
+endfor
