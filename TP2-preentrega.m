@@ -85,12 +85,18 @@ function x = EG(Ab,n)
     endfor
   endfor
 
-  #Vector solucion
+   #Vector solucion
 
-  x = ones(n-1,1);
+  x = zeros(n-1,1);
 
-  for i = 1:(n-1)
-    x(i) = (Ab(i,n) -sum(Ab(i,1:n-1)*x(:)))/Ab(i,i);
+  for i = (n-1):-1:1
+    suma = 0;
+    if i<=(n-2)
+      for j = i+1:n-1
+        suma = suma + Ab(i,j)*x(j)
+      endfor
+    endif
+    x(i) = (Ab(i,n) - suma)/Ab(i,i);
   endfor
 
 endfunction
@@ -165,3 +171,49 @@ endfunction
 x10_GS = GS(A10,b10);
 x50_GS = GS(A50,b50);
 x100_GS = GS(A100,b100);
+
+#Defino matrices D, L y U tal que A = D + L + U
+
+#Matriz de iteracion para el metodo de Jacobi
+
+function radio_espectral_Jacobi = r(A,b)
+  radio_espectral_Jacobi = 0;
+  D = diag(diag(A));
+  L = tril(A)-D;
+  U = triu(A)-D;
+  T_j = -inv(D)*(L+U); #matriz de iteracion T de Jacobi
+
+  #Chequeo condicion de convergencia
+  radio_espectral_Jacobi = max(abs(eig(T_j)));
+  if radio_espectral_Jacobi<1
+    disp('El metodo converge.')
+  else disp('El metodo no converge')
+  endif
+
+endfunction
+
+r10_Jacobi = r(A10,b10);
+r50_Jacobi = r(A50,b50);
+r100_Jacobi = r(A100,b100);
+
+#Matriz de iteracion para el metodo de Gauss-Seidel
+
+function radio_espectral_GS = s(A,b)
+  radio_espectral_GS = 0;
+  D = diag(diag(A));
+  L = tril(A)-D;
+  U = triu(A)-D;
+  T_gs = -inv(D + L)*U; #matriz de iteracion T de Gauss-Seidel
+
+  #Chequeo condicion de convergencia
+  radio_espectral_GS = max(abs(eig(T_gs)));
+  if radio_espectral_GS<1
+    disp('El metodo converge.')
+  else disp('El metodo no converge')
+  endif
+
+endfunction
+
+r10_GS = s(A10,b10);
+r50_GS = s(A50,b50);
+r100_GS = s(A100,b100);
