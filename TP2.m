@@ -99,23 +99,23 @@ function x = EG(Ab,n)
    #Triangulacion de la matriz
 
   for i = 1:n
-    for j = (i+1):(n-1)
+    for j = (i+1):(n+1)
       Ab(j,:) = Ab(j,:) - (Ab(j,i)/Ab(i,i))*Ab(i,:);
     endfor
   endfor
 
    #Vector solucion
 
-  x = zeros(n-1,1);
+  x = zeros(n+1,1);
 
-  for i = (n-1):-1:1
+  for i = (n+1):-1:1
     suma = 0;
-    if i<=(n-2)
-      for j = i+1:n-1
-        suma = suma + Ab(i,j)*x(j)
+    if i<=n
+      for j = i+1:n+1
+        suma = suma + Ab(i,j)*x(j);
       endfor
     endif
-    x(i) = (Ab(i,n) - suma)/Ab(i,i);
+    x(i) = (Ab(i,n+2) - suma)/Ab(i,i);
   endfor
 
 endfunction
