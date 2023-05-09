@@ -124,6 +124,23 @@ x10_EG = EG(Ab10,10);
 x50_EG = EG(Ab50,50);
 x100_EG = EG(Ab100,100);
 
+#Ploteo de las soluciones
+
+plot(x10_EG)
+xlabel('Nodo','fontsize',14)
+ylabel('Desplazamiento','fontsize',14)
+title('Eliminacion Gaussiana - n=10')
+
+plot(x50_EG)
+xlabel('Nodo','fontsize',14)
+ylabel('Desplazamiento','fontsize',14)
+title('Eliminacion Gaussiana - n=50')
+
+plot(x100_EG)
+xlabel('Nodo','fontsize',14)
+ylabel('Desplazamiento','fontsize',14)
+title('Eliminacion Gaussiana - n=100')
+
 # 2) Jacobi
 function x = Jacobi(A,b)
   x = zeros(length(b),1);
